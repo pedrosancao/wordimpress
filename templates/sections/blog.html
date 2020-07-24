@@ -1,0 +1,53 @@
+<section class="blog bg-dar">
+    <div class="container pt-3">
+        <h2>Posts</h2>
+        {% block blog_content %}
+        <div class="row">
+            {% for post in posts | slice(0, 2) %}
+            <article class="col-12 col-md-6 col-lg-{{ loop.index0 ? 5 : 7 }} mb-5 ">
+                <div class="shadow p-3 bg-white rounded">
+                    {% if post.post_media is defined %}
+                    <a href="post/{{ post.slug }}.html">
+                        <img src="{{ post.post_media.medium }}" alt="{{ post.post_media_alt }}">
+                    </a>
+                    {% endif %}
+                    <a href="post/{{ post.slug }}.html">
+                        <h3>{{ post.title }}</h3>
+                    </a>
+                    <div class="category">
+                        <a href="category/{{ attribute(categories, post.categories | first).slug }}.html">
+                            {{ attribute(categories, post.categories | first).name }}
+                        </a>
+                    </div>
+                    <a href="post/{{ post.slug }}.html">
+                        <p>{{ post.excerpt | striptags | trim }}</p>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="row posts mt-2">
+            {% for post in posts | slice(2, 3) %}
+            <article class="col-12 col-lg mb-4">
+                <a href="post/{{ post.slug }}.html">
+                    <h3>{{ post.title }}</h3>
+                </a>
+                <div class="meta my-2">
+                    <a href="category/{{ attribute(categories, post.categories | first).slug }}.html">
+                        {{ attribute(categories, post.categories | first).name }}
+                    </a>
+                </div>
+                <a href="post/{{ post.slug }}.html">
+                    <p>{{ post.excerpt | striptags | trim }}</p>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mb-3">
+                <a href="posts.html" class="more">All posts</a>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</section>

@@ -1,0 +1,11 @@
+{% extends "basic.twig" %}
+
+{% block meta %}
+    <meta property="fb:app_id" content="{{ fb_app }}" />
+{% endblock %}
+{% block scripts %}
+    {% if fb_app %}
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v7.0&appId={{ fb_app }}&autoLogAppEvents=1" nonce="S6UZxqa5"></script>
+    {% endif %}
+{% endblock %}

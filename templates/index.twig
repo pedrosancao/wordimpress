@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include 'sections/header.html' %}
+    <div class="container p-3 shadow">
+        {{ readme | markdown_to_html }}
+    </div>
+    {% include 'sections/blog.html' %}
+    {% include 'sections/footer.html' %}
+{% endblock %}
