@@ -43,7 +43,6 @@ function copyMedia($arguments)
     echo "\nCopying media.\n";
     $origin = 'resources/media/';
     $destination = 'build/media/';
-    array_map('unlink', glob($destination . '*'));
     array_map(function ($file) use ($destination) {
         copy($file, $destination . basename($file));
     }, glob($origin . '*'));
