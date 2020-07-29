@@ -2,7 +2,7 @@
     "name": "pedrosancao/wordpress-static-generator",
     "description": "Static site generator using Wordpress API as content source.",
     "keywords": ["static-site-generator", "wordpress-rest", "wordpress-api", "wp-json", "twig"],
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
