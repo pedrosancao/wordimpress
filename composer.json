@@ -1,8 +1,8 @@
 {
     "name": "pedrosancao/wordpress-static-generator",
-    "description": "Static site generator using Wordpress API as content source.",
+    "description": "Static site generator library using Wordpress API as content source.",
     "keywords": ["static-site-generator", "wordpress-rest", "wordpress-api", "wp-json", "twig"],
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -10,11 +10,17 @@
             "email": "pedrosancao@users.noreply.github.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "PedroSancao\\Wpsg\\": "src/"
+        }
+    },
     "require": {
+        "php": ">=7.1.0",
+        "ext-dom": "*",
+        "ext-gd": "*",
         "twig/twig": "^3.0",
         "twig/intl-extra": "^3.0",
-        "twbs/bootstrap": "^4.5",
-        "symfony/dotenv": "^5.1",
         "twig/markdown-extra": "^3.0",
         "erusev/parsedown": "^1.7"
     }
