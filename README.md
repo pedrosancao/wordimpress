@@ -1,6 +1,6 @@
-# Wordpress static site generator
+# Wordimpress
 
-Static site generator library that uses Wordpress API as content source. The library still a proof of concept.
+Static site generator library that uses Wordpress API as content source. The library still a prototype.
 
 ## Key features
 

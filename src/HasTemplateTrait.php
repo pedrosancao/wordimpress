@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroSancao\Wpsg;
+namespace PedroSancao\Wordimpress;
 
 trait HasTemplateTrait
 {

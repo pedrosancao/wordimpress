@@ -1,5 +1,5 @@
 {
-    "name": "pedrosancao/wordpress-static-generator",
+    "name": "pedrosancao/wordimpress",
     "description": "Static site generator library using Wordpress API as content source.",
     "keywords": ["static-site-generator", "wordpress-rest", "wordpress-api", "wp-json", "twig"],
     "type": "library",
@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "PedroSancao\\Wpsg\\": "src/"
+            "PedroSancao\\Wordimpress\\": "src/"
         }
     },
     "require": {

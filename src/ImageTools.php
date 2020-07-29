@@ -1,8 +1,8 @@
 <?php
 
-namespace PedroSancao\Wpsg;
+namespace PedroSancao\Wordimpress;
 
-use PedroSancao\Wpsg\Exceptions\ImageException;
+use PedroSancao\Wordimpress\Exceptions\ImageException;
 
 class ImageTools
 {
@@ -61,7 +61,7 @@ class ImageTools
      *
      * @param string $url
      * @return string
-     * @throws \PedroSancao\Wpsg\Exceptions\ImageException
+     * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
      */
     protected function getFileContents(string $url) : string
     {
@@ -77,7 +77,7 @@ class ImageTools
      * @param string $url
      * @param string $destination
      * @return string
-     * @throws \PedroSancao\Wpsg\Exceptions\ImageException
+     * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
      */
     public function import(string $url, string $destination) : string
     {
@@ -108,7 +108,7 @@ class ImageTools
      *
      * @param string $url
      * @param string $destination
-     * @throws \PedroSancao\Wpsg\Exceptions\ImageException
+     * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
      */
     public function downloadAsWebp(string $url, string $destination) : void
     {

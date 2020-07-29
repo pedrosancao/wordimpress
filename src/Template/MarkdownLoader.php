@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroSancao\Wpsg\Template;
+namespace PedroSancao\Wordimpress\Template;
 
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Extra\Markdown\MarkdownRuntime;

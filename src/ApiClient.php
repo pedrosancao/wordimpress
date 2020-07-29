@@ -1,8 +1,8 @@
 <?php
 
-namespace PedroSancao\Wpsg;
+namespace PedroSancao\Wordimpress;
 
-use PedroSancao\Wpsg\Exceptions\ApiException;
+use PedroSancao\Wordimpress\Exceptions\ApiException;
 
 class ApiClient
 {
@@ -27,7 +27,7 @@ class ApiClient
      * @param string $endpoint
      * @param array $parameters
      * @return array|object
-     * @throws PedroSancao\Wpsg\Exceptions\ApiException
+     * @throws PedroSancao\Wordimpress\Exceptions\ApiException
      */
     public function loadData(string $endpoint, array $parameters = [])
     {

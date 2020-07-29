@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroSancao\Wpsg\BlogData;
+namespace PedroSancao\Wordimpress\BlogData;
 
 trait HasPostsTrait
 {

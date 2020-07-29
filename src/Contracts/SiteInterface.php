@@ -1,8 +1,8 @@
 <?php
 
-namespace PedroSancao\Wpsg\Contracts;
+namespace PedroSancao\Wordimpress\Contracts;
 
-use PedroSancao\Wpsg\Generator;
+use PedroSancao\Wordimpress\Generator;
 
 interface SiteInterface
 {
@@ -37,14 +37,14 @@ interface SiteInterface
     /**
      * Callback executed before generation start
      *
-     * @param \PedroSancao\Wpsg\Generator $generator
+     * @param \PedroSancao\Wordimpress\Generator $generator
      */
     public function beforeGenerate(Generator $generator) : void;
 
     /**
      * Configure the templates that must be used to generate pages
      *
-     * @param \PedroSancao\Wpsg\Generator $generator
+     * @param \PedroSancao\Wordimpress\Generator $generator
      */
     public function configureTemplates(Generator $generator) : void;
 }

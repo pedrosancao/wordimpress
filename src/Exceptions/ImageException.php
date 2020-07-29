@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroSancao\Wpsg\Exceptions;
+namespace PedroSancao\Wordimpress\Exceptions;
 
 use ErrorException;
 

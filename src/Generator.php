@@ -1,12 +1,12 @@
 <?php
 
-namespace PedroSancao\Wpsg;
+namespace PedroSancao\Wordimpress;
 
-use PedroSancao\Wpsg\BlogData\CacheTrait;
-use PedroSancao\Wpsg\BlogData\DataLoadTrait;
-use PedroSancao\Wpsg\Contracts\SiteInterface;
-use PedroSancao\Wpsg\Exceptions\ImageException;
-use PedroSancao\Wpsg\Template\MarkdownLoader;
+use PedroSancao\Wordimpress\BlogData\CacheTrait;
+use PedroSancao\Wordimpress\BlogData\DataLoadTrait;
+use PedroSancao\Wordimpress\Contracts\SiteInterface;
+use PedroSancao\Wordimpress\Exceptions\ImageException;
+use PedroSancao\Wordimpress\Template\MarkdownLoader;
 use Twig\Environment;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\Extra\Markdown\MarkdownExtension;
@@ -19,12 +19,12 @@ class Generator
     use HasTemplateTrait;
 
     /**
-     * @var \PedroSancao\Wpsg\Contracts\SiteInterface
+     * @var \PedroSancao\Wordimpress\Contracts\SiteInterface
      */
     protected $site;
 
     /**
-     * @var \PedroSancao\Wpsg\ApiClient
+     * @var \PedroSancao\Wordimpress\ApiClient
      */
     protected $apiClient;
 
@@ -34,7 +34,7 @@ class Generator
     protected $twig;
 
     /**
-     * @oaram PedroSancao\Wpsg\Contracts\SiteInterface $site
+     * @oaram PedroSancao\Wordimpress\Contracts\SiteInterface $site
      */
     public function __construct(SiteInterface $site)
     {
@@ -46,7 +46,7 @@ class Generator
     /**
      * Initialize Twig template engine
      *
-     * @oaram PedroSancao\Wpsg\Contracts\SiteInterface $site
+     * @oaram PedroSancao\Wordimpress\Contracts\SiteInterface $site
      */
     protected function initTwig() : void
     {

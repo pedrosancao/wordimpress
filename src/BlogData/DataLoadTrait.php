@@ -1,21 +1,21 @@
 <?php
 
-namespace PedroSancao\Wpsg\BlogData;
+namespace PedroSancao\Wordimpress\BlogData;
 
 use DOMDocument;
-use PedroSancao\Wpsg\Contracts\ImportImagesInterface;
-use PedroSancao\Wpsg\Contracts\WithAuthorsInterface;
-use PedroSancao\Wpsg\Contracts\WithCategoriesInterface;
-use PedroSancao\Wpsg\Contracts\WithMediaInterface;
-use PedroSancao\Wpsg\Contracts\WithPagesInterface;
-use PedroSancao\Wpsg\Contracts\WithPostsInterface;
-use PedroSancao\Wpsg\Exceptions\ImageException;
-use PedroSancao\Wpsg\ImageTools;
+use PedroSancao\Wordimpress\Contracts\ImportImagesInterface;
+use PedroSancao\Wordimpress\Contracts\WithAuthorsInterface;
+use PedroSancao\Wordimpress\Contracts\WithCategoriesInterface;
+use PedroSancao\Wordimpress\Contracts\WithMediaInterface;
+use PedroSancao\Wordimpress\Contracts\WithPagesInterface;
+use PedroSancao\Wordimpress\Contracts\WithPostsInterface;
+use PedroSancao\Wordimpress\Exceptions\ImageException;
+use PedroSancao\Wordimpress\ImageTools;
 
 trait DataLoadTrait
 {
     /**
-     * @var \PedroSancao\Wpsg\ApiClient
+     * @var \PedroSancao\Wordimpress\ApiClient
      */
     protected $apiClient;
 
@@ -29,7 +29,7 @@ trait DataLoadTrait
      *
      * @param string $endpoint
      * @param array $parameters
-     * @param \PedroSancao\Wpsg\callable $callback
+     * @param \PedroSancao\Wordimpress\callable $callback
      * @param string $value
      * @param string $key
      * @return array

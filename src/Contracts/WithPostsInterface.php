@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroSancao\Wpsg\Contracts;
+namespace PedroSancao\Wordimpress\Contracts;
 
 interface WithPostsInterface
 {
