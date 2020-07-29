@@ -9,6 +9,7 @@ use PedroSancao\Wpsg\Contracts\WithCategoriesInterface;
 use PedroSancao\Wpsg\Contracts\WithMediaInterface;
 use PedroSancao\Wpsg\Contracts\WithPagesInterface;
 use PedroSancao\Wpsg\Contracts\WithPostsInterface;
+use PedroSancao\Wpsg\Exceptions\ImageException;
 use PedroSancao\Wpsg\ImageTools;
 
 trait DataLoadTrait
@@ -146,7 +147,11 @@ trait DataLoadTrait
             if (key_exists('media', $this->blogData)) {
                 array_walk($this->blogData['media'], function ($media) use ($imageTools, $destination) {
                     foreach (get_object_vars($media->sizes) as $size => $url) {
-                        $media->sizes->{$size} = 'media/' . $imageTools->import($url, $destination);
+                        try {
+                            $media->sizes->{$size} = 'media/' . $imageTools->import($url, $destination);
+                        } catch(ImageException $exception) {
+                            echo $exception->getMessage(), "\n";
+                        }
                     }
                 });
             }
@@ -164,8 +169,12 @@ trait DataLoadTrait
                             }
                         }
                         $imageUrl = $image->attributes->getNamedItem('src')->value;
-                        $newUrl = 'media/' . $imageTools->import($imageUrl, $destination);
-                        $post->content = str_replace($imageUrl, $newUrl, $post->content);
+                        try {
+                            $newUrl = 'media/' . $imageTools->import($imageUrl, $destination);
+                            $post->content = str_replace($imageUrl, $newUrl, $post->content);
+                        } catch(ImageException $exception) {
+                            echo $exception->getMessage(), "\n";
+                        }
                     }
                 });
             }
