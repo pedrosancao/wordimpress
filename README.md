@@ -16,5 +16,8 @@ Example of usage is available on [Bootstrap Template](https://github.com/pedrosa
 
 The following tasks are my current priorities:
 
-- 🔝 Convert procedural code to OOP;
 - Add paginations for all posts and category posts;
+- Iterate API to get more then 100 of each resource;
+- Load data from tags;
+- Generate tags pages;
+- Generate author pages;
