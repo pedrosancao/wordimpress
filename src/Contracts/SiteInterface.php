@@ -42,9 +42,9 @@ interface SiteInterface
     public function beforeGenerate(Generator $generator) : void;
 
     /**
-     * Generate static pages
+     * Configure the templates that must be used to generate pages
      *
      * @param \PedroSancao\Wpsg\Generator $generator
      */
-    public function generate(Generator $generator) : void;
+    public function configureTemplates(Generator $generator) : void;
 }

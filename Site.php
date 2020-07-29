@@ -85,8 +85,16 @@ class Site implements
     /**
      * @inheritdoc
      */
-    public function generate(Generator $generator): void
+    public function configureTemplates(Generator $generator): void
     {
+        $generator->addTemplate('index.twig', 'index.html', [
+            'readme' => file_get_contents('./README.md'),
+        ]);
+        $generator->addTemplate('blog.twig', 'posts.html');
+        $generator->addCategoryTemplate('category.twig');
+        $generator->addPostTemplate('post.twig', 'post/', [
+            'content' => 'sections/post.html',
+        ]);
     }
 
 }
