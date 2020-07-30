@@ -102,7 +102,8 @@ class Cli
 
         while (false !== $events = inotify_read($inotify)) {
             foreach ($events as $event) {
-                $this->printColor(sprintf("\nChanges detected at %s.\n", date('H:i:s')), 2);
+                $this->clearScreen();
+                $this->printColor(sprintf("Changes detected at %s.\n", date('H:i:s')), 2);
                 call_user_func([$this, $watcherCallbacks[$event['wd']]]);
             }
         }
@@ -113,7 +114,7 @@ class Cli
      */
     protected function compileHtml() : void
     {
-        echo shell_exec($this->binDir . '/wordimpress-generate ' . get_class($this->site));
+        passthru($this->binDir . '/wordimpress-generate ' . get_class($this->site));
     }
 
     /**

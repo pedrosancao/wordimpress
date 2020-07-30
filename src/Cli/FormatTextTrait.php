@@ -5,6 +5,14 @@ namespace PedroSancao\Wordimpress\Cli;
 trait FormatTextTrait
 {
     /**
+     * Clear terminal screen
+     */
+    public function clearScreen() : void
+    {
+        echo "\33c";
+    }
+
+    /**
      * Print colored text
      *
      * @param string $text
