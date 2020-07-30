@@ -10,6 +10,7 @@
             "email": "pedrosancao@users.noreply.github.com"
         }
     ],
+    "bin": ["bin/wordimpress-generate"],
     "autoload": {
         "psr-4": {
             "PedroSancao\\Wordimpress\\": "src/"
