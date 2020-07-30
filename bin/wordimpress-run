@@ -1,0 +1,20 @@
+#!/usr/bin/php
+<?php
+
+if (false === $autoload = realpath(__DIR__ . '/../../../autoload.php')) {
+    echo "\33[38;5;1mUnable to locate autoload.php\33[0m\n";
+    exit(1);
+}
+
+require $autoload;
+
+$optionsIndex;
+$options = array_keys(getopt('pw', ['production', 'watch'], $optionsIndex));
+array_splice($argv, 1, $optionsIndex - 1);
+
+$cli = new PedroSancao\Wordimpress\Cli($argv);
+$cli->run($forProduction = count(array_intersect($options, ['p', 'production'])) > 0);
+
+if (count(array_intersect($options, ['w', 'watch'])) > 0) {
+    $cli->watch();
+}

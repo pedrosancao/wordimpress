@@ -8,19 +8,5 @@ if (false === $autoload = realpath(__DIR__ . '/../../../autoload.php')) {
 
 require $autoload;
 
-if ($argc < 2 || !class_exists($argv[1])) {
-    # TODO error color
-    echo "Please provide a valid class name\n";
-    exit(1);
-}
-
-$site = new $argv[1];
-if (!$site instanceof PedroSancao\Wordimpress\Contracts\SiteInterface) {
-    # TODO error color
-    echo "Provided class must implements PedroSancao\Wordimpress\Contracts\SiteInterface\n";
-    exit(1);
-}
-
-$generator = new PedroSancao\Wordimpress\Generator($site);
-$generator->prepare();
-$generator->generate();
+$cli = new PedroSancao\Wordimpress\Cli($argv);
+$cli->generate();
