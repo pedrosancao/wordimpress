@@ -10,7 +10,7 @@ Static site generator library that uses Wordpress API as content source. The lib
 
 ## Usage
 
-Example of usage is available on [Bootstrap Template](https://github.com/pedrosancao/wordpress-static-bootstrap-template).
+Example of usage is available on [Bootstrap Template](https://github.com/pedrosancao/wordimpress-bootstrap).
 
 ## To do list
 
