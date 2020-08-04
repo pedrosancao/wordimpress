@@ -17,14 +17,14 @@ Static site generator library that uses Wordpress API as content source. The lib
 
 ## Usage
 
-Example of usage is available on [Bootstrap Template](https://github.com/pedrosancao/wordimpress-bootstrap).
+Create a class implementing `PedroSancao\Wordimpress\Contracts\SiteInterface`, then implement other
+interfaces on the namespace `PedroSancao\Wordimpress\Contracts` to add more capabilities, some of them
+have traits that implements the interface (`PedroSancao\Wordimpress\BlogData\Has*Trait`).
 
-## To do list
+Invoke commands on [bin/](./bin) directory passing the classname as parameter.
 
-The following tasks are my current priorities:
+An example of usage is available on [Bootstrap Template](https://github.com/pedrosancao/wordimpress-bootstrap).
 
-- Add paginations for all posts and category posts;
-- Iterate API to get more then 100 of each resource;
-- Load data from tags;
-- Generate tags pages;
-- Generate author pages;
+## To do
+
+Check the project's [kanban board](https://github.com/pedrosancao/wordimpress/projects/1).
