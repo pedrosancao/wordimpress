@@ -6,7 +6,6 @@
 ![packagist version](https://img.shields.io/packagist/v/pedrosancao/wordimpress)
 ![packagist downloads](https://img.shields.io/packagist/dt/pedrosancao/wordimpress)
 
-
 Static site generator library that uses Wordpress API as content source. The library still a prototype.
 
 ## Key features
@@ -14,6 +13,16 @@ Static site generator library that uses Wordpress API as content source. The lib
 - uses Twig as template engine
 - convert images to WebP format
 - supports markdown to HTML
+
+## Dependencies
+
+This package rely on these PHP extensions:
+
+- GD
+- DOM
+- Inotify
+
+Make sure you have them installed.
 
 ## Usage
 
