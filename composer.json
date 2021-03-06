@@ -23,6 +23,7 @@
         "php": ">=7.1.0",
         "ext-dom": "*",
         "ext-gd": "*",
+        "ext-inotify": "*",
         "twig/twig": "^3.0",
         "twig/intl-extra": "^3.0",
         "twig/markdown-extra": "^3.0",
