@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 if (false === $autoload = realpath(__DIR__ . '/../../../autoload.php')) {
