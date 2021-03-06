@@ -11,8 +11,7 @@
         }
     ],
     "bin": [
-        "bin/wordimpress-generate",
-        "bin/wordimpress-run"
+        "bin/wordimpress"
     ],
     "autoload": {
         "psr-4": {

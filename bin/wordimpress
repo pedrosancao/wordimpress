@@ -9,10 +9,14 @@ if (false === $autoload = realpath(__DIR__ . '/../../../autoload.php')) {
 require $autoload;
 
 $optionsIndex;
-$options = array_keys(getopt('pw', ['production', 'watch'], $optionsIndex));
+$options = array_keys(getopt('pw', ['production', 'watch', 'html-only'], $optionsIndex));
 array_splice($argv, 1, $optionsIndex - 1);
 
 $cli = new PedroSancao\Wordimpress\Cli($argv);
+if (in_array('html-only', $options)) {
+    $cli->generateHtml();
+    exit;
+}
 $cli->run($forProduction = count(array_intersect($options, ['p', 'production'])) > 0);
 
 if (count(array_intersect($options, ['w', 'watch'])) > 0) {

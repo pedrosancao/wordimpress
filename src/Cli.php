@@ -14,11 +14,6 @@ class Cli
     use FormatTextTrait;
 
     /**
-     * @var string
-     */
-    private $binDir;
-
-    /**
      * @var \PedroSancao\Wordimpress\Contracts\SiteInterface
      */
     private $site;
@@ -30,7 +25,6 @@ class Cli
      */
     public function __construct(array $argv)
     {
-        $this->binDir = dirname($argv[0]);
         if (count($argv) < 2 || !class_exists($argv[1])) {
             $this->printColor("Please provide a valid class name\n", 1);
             exit(1);
@@ -47,7 +41,7 @@ class Cli
     /**
      * Fetch data and generate HTML pages
      */
-    public function generate() : void
+    public function generateHtml() : void
     {
         $generator = new Generator($this->site);
         $generator->prepare();
@@ -61,7 +55,7 @@ class Cli
      */
     public function run(bool $forProduction = false) : void
     {
-        $this->compileHtml();
+        $this->generateHtml();
         $this->compileSass($forProduction);
         $this->copyMedia();
     }
@@ -71,12 +65,12 @@ class Cli
      */
     public function watch() : void
     {
-        $callbackWatches = ['compileHtml' => [
+        $callbackWatches = ['generateHtml' => [
             (new ReflectionClass($this->site))->getFileName(),
             $this->site->getTemplatesDir(),
         ]];
         if ($this->site instanceof WatchFilesInterface) {
-            array_push($callbackWatches['compileHtml'], ...$this->site->watchPaths());
+            array_push($callbackWatches['generateHtml'], ...$this->site->watchPaths());
         }
         if ($this->site instanceof CompileSassInterface) {
             $callbackWatches['compileSass'] = [dirname($this->site->getSassSourceFile())];
@@ -107,14 +101,6 @@ class Cli
                 call_user_func([$this, $watcherCallbacks[$event['wd']]]);
             }
         }
-    }
-
-    /**
-     * Invoke HTML generator
-     */
-    protected function compileHtml() : void
-    {
-        passthru($this->binDir . '/wordimpress-generate ' . get_class($this->site));
     }
 
     /**
