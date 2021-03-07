@@ -40,8 +40,7 @@ trait DataLoadTrait
         callable $callback,
         string $value = null,
         string $key = null
-    ) : array
-    {
+    ) : array {
         $data = $this->apiClient->loadData($endpoint, $parameters);
         if (empty($data)) {
             return [];
@@ -149,7 +148,7 @@ trait DataLoadTrait
                     foreach (get_object_vars($media->sizes) as $size => $url) {
                         try {
                             $media->sizes->{$size} = 'media/' . $imageTools->import($url, $destination);
-                        } catch(ImageException $exception) {
+                        } catch (ImageException $exception) {
                             echo $exception->getMessage(), "\n";
                         }
                     }
@@ -172,7 +171,7 @@ trait DataLoadTrait
                         try {
                             $newUrl = 'media/' . $imageTools->import($imageUrl, $destination);
                             $post->content = str_replace($imageUrl, $newUrl, $post->content);
-                        } catch(ImageException $exception) {
+                        } catch (ImageException $exception) {
                             echo $exception->getMessage(), "\n";
                         }
                     }

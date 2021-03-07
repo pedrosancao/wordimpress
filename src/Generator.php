@@ -5,7 +5,6 @@ namespace PedroSancao\Wordimpress;
 use PedroSancao\Wordimpress\BlogData\CacheTrait;
 use PedroSancao\Wordimpress\BlogData\DataLoadTrait;
 use PedroSancao\Wordimpress\Contracts\SiteInterface;
-use PedroSancao\Wordimpress\Exceptions\ImageException;
 use PedroSancao\Wordimpress\Template\MarkdownLoader;
 use Twig\Environment;
 use Twig\Extra\Intl\IntlExtension;
@@ -135,10 +134,9 @@ class Generator
         foreach ($this->templates as $template) {
             $html = $this->twig->render($template['template'], $template['data'] + $this->blogData);
             if (file_put_contents($output . $template['file'], $html)) {
-                echo '- ' ,$template['file'], "\n";
+                echo '- ', $template['file'], "\n";
             }
         }
         echo "Done.\n";
     }
 }
-
