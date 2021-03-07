@@ -21,21 +21,23 @@ class Cli
     /**
      * Create new instance
      *
-     * @param array $argv
+     * @param string $siteClass
      */
-    public function __construct(array $argv)
+    public function __construct(string $siteClass)
     {
-        if (count($argv) < 2 || !class_exists($argv[1])) {
+        if (!class_exists($siteClass)) {
             $this->printColor("Please provide a valid class name\n", 1);
             exit(1);
         }
 
-        $this->site = new $argv[1];
-        if (!$this->site instanceof SiteInterface) {
-            $interface = SiteInterface::class;
+        $interface = SiteInterface::class;
+        $reflector = new \ReflectionClass($siteClass);
+        if (!$reflector->implementsInterface($interface)) {
             $this->printColor("Provided class must implements {$interface}\n", 1);
             exit(1);
         }
+
+        $this->site = new $siteClass;
     }
 
     /**

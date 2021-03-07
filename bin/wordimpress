@@ -10,9 +10,8 @@ require $autoload;
 
 $optionsIndex;
 $options = array_keys(getopt('pw', ['production', 'watch', 'html-only'], $optionsIndex));
-array_splice($argv, 1, $optionsIndex - 1);
-
-$cli = new PedroSancao\Wordimpress\Cli($argv);
+$siteClass = $argc > $optionsIndex ? $argv[$optionsIndex] : '';
+$cli = new PedroSancao\Wordimpress\Cli($siteClass);
 if (in_array('html-only', $options)) {
     $cli->generateHtml();
     exit;
