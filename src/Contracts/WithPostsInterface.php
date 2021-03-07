@@ -5,32 +5,34 @@ namespace PedroSancao\Wordimpress\Contracts;
 interface WithPostsInterface
 {
     /**
-     * Get filters for request on Wordpress API
+     * Get filters for request on Wordpress API.
      *
      * @param array $data
-     * @return string
-     */
-    public function getPostsFilters(array $data) : array;
-
-    /**
-     * Get property to use as key
      *
      * @return string
      */
-    public function getPostKey() : ?string;
+    public function getPostsFilters(array $data): array;
 
     /**
-     * Get single property to return
+     * Get property to use as key.
      *
      * @return string
      */
-    public function getPostValue() : ?string;
+    public function getPostKey(): ?string;
 
     /**
-     * Callback to run on each record
+     * Get single property to return.
+     *
+     * @return string
+     */
+    public function getPostValue(): ?string;
+
+    /**
+     * Callback to run on each record.
      *
      * @param $post
      * @param $index
+     *
      * @return string
      */
     public function dataPost($post, $index);

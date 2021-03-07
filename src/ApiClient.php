@@ -12,7 +12,7 @@ class ApiClient
     private $baseUrl;
 
     /**
-     * Create new instance
+     * Create new instance.
      *
      * @param string $wordpressUrl
      */
@@ -22,12 +22,14 @@ class ApiClient
     }
 
     /**
-     * Load data from Wordpress REST API
+     * Load data from Wordpress REST API.
      *
      * @param string $endpoint
      * @param array $parameters
+     *
+     * @throws \PedroSancao\Wordimpress\Exceptions\ApiException
+     *
      * @return array|object
-     * @throws PedroSancao\Wordimpress\Exceptions\ApiException
      */
     public function loadData(string $endpoint, array $parameters = [])
     {

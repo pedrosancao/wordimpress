@@ -5,7 +5,7 @@ namespace PedroSancao\Wordimpress\Contracts;
 interface ImportImagesInterface
 {
     /**
-     * Tells if images should be converted
+     * Tells if images should be converted.
      */
-    public function mustConvertImages() : bool;
+    public function mustConvertImages(): bool;
 }

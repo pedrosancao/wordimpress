@@ -2,7 +2,6 @@
 
 namespace PedroSancao\Wordimpress;
 
-use ErrorException;
 use PedroSancao\Wordimpress\Cli\FormatTextTrait;
 use PedroSancao\Wordimpress\Contracts\CompileSassInterface;
 use PedroSancao\Wordimpress\Contracts\CopyMediaInterface;
@@ -25,7 +24,7 @@ class Cli
     private $wordimpressExecutable;
 
     /**
-     * Create new instance
+     * Create new instance.
      *
      * @param string $siteClass
      */
@@ -43,13 +42,13 @@ class Cli
             exit(1);
         }
 
-        $this->site = new $siteClass;
+        $this->site = new $siteClass();
     }
 
     /**
-     * Fetch data and generate HTML pages
+     * Fetch data and generate HTML pages.
      */
-    public function generateHtml() : void
+    public function generateHtml(): void
     {
         $generator = new Generator($this->site);
         $generator->prepare();
@@ -57,11 +56,11 @@ class Cli
     }
 
     /**
-     * Compile all resources: HTML, Sass and media
+     * Compile all resources: HTML, Sass and media.
      *
      * @param bool $forProduction
      */
-    public function run(bool $forProduction = false) : void
+    public function run(bool $forProduction = false): void
     {
         $this->generateHtml();
         $this->compileSass($forProduction);
@@ -69,9 +68,9 @@ class Cli
     }
 
     /**
-     * Watch for file change and recompile
+     * Watch for file change and recompile.
      */
-    public function watch() : void
+    public function watch(): void
     {
         $this->validateWatcher();
         $callbackWatches = ['invokeBuildHtml' => [
@@ -113,9 +112,9 @@ class Cli
     }
 
     /**
-     * Validate watcher requirements
+     * Validate watcher requirements.
      */
-    protected function validateWatcher() : void
+    protected function validateWatcher(): void
     {
         if (php_sapi_name() !== 'cli') {
             throw new \ErrorException('Watcher can only be used on CLI.');
@@ -129,19 +128,19 @@ class Cli
     }
 
     /**
-     * Invoke HTML generator in new process
+     * Invoke HTML generator in new process.
      */
-    protected function invokeBuildHtml() : void
+    protected function invokeBuildHtml(): void
     {
         passthru($this->wordimpressExecutable . ' --html-only ' . get_class($this->site));
     }
 
     /**
-     * Invoke Sass compiler
+     * Invoke Sass compiler.
      *
      * @param bool $forProduction
      */
-    protected function compileSass(bool $forProduction = false) : void
+    protected function compileSass(bool $forProduction = false): void
     {
         if ($this->site instanceof CompileSassInterface) {
             echo "Compiling Sass.\n";
@@ -177,9 +176,9 @@ class Cli
     }
 
     /**
-     * Copy media files
+     * Copy media files.
      */
-    protected function copyMedia() : void
+    protected function copyMedia(): void
     {
         if ($this->site instanceof CopyMediaInterface) {
             echo "Copying media.\n";
