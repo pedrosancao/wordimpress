@@ -5,17 +5,18 @@ namespace PedroSancao\Wordimpress\BlogData;
 trait HasMediaTrait
 {
     /**
-     * Get filters for request on Wordpress API
+     * Get filters for request on Wordpress API.
      *
      * @param array $data
+     *
      * @return string
      */
-    public function getMediaFilters(array $data) : array
+    public function getMediaFilters(array $data): array
     {
         if (key_exists('posts', $data)) {
             $ids = array_unique(array_filter(array_column($data['posts'], 'post_media')));
             return [
-                'include'  => $ids,
+                'include' => $ids,
                 'per_page' => count($ids),
             ];
         }
@@ -25,30 +26,31 @@ trait HasMediaTrait
     }
 
     /**
-     * Get property to use as key
+     * Get property to use as key.
      *
      * @return string
      */
-    public function getMediaKey() : ?string
+    public function getMediaKey(): ?string
     {
         return 'id';
     }
 
     /**
-     * Get single property to return
+     * Get single property to return.
      *
      * @return string
      */
-    public function getMediaValue() : ?string
+    public function getMediaValue(): ?string
     {
         return null;
     }
 
     /**
-     * Callback to run on each record
+     * Callback to run on each record.
      *
      * @param $media
      * @param $index
+     *
      * @return string
      */
     public function dataMedia($media, $index)
@@ -76,25 +78,25 @@ trait HasMediaTrait
         }
         return (object) [
             'sizes' => (object) [
-                'thumb'  => $thumbnail,
+                'thumb' => $thumbnail,
                 'medium' => $medium,
-                'large'  => $large,
+                'large' => $large,
             ],
             'alt' => $media->alt_text ?: strtr($media->title->rendered, '-_', '  '),
         ];
     }
 
-    protected function getMinWidthThumbnail() : int
+    protected function getMinWidthThumbnail(): int
     {
         return 333;
     }
 
-    protected function getMinWidthMedium() : int
+    protected function getMinWidthMedium(): int
     {
         return 635;
     }
 
-    protected function getMinWidthLarge() : int
+    protected function getMinWidthLarge(): int
     {
         return 825;
     }

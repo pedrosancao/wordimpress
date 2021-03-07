@@ -22,7 +22,7 @@ class ImageTools
     ];
 
     /**
-     * Create new instance
+     * Create new instance.
      *
      * @param bool $shouldConvert
      */
@@ -32,22 +32,23 @@ class ImageTools
     }
 
     /**
-     * Update image files extension to convert
+     * Update image files extension to convert.
      *
      * @param array $types
      */
-    public function setConvertTypes(array $types) : void
+    public function setConvertTypes(array $types): void
     {
         $this->convertTypes = $types;
     }
 
     /**
-     * Checks if image should be converted
+     * Checks if image should be converted.
      *
      * @param string $filepath
+     *
      * @return bool
      */
-    protected function shouldConvert(string $filepath) : bool
+    protected function shouldConvert(string $filepath): bool
     {
         if ($this->shouldConvert) {
             $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
@@ -57,13 +58,15 @@ class ImageTools
     }
 
     /**
-     * Retrieve file contents from URL
+     * Retrieve file contents from URL.
      *
      * @param string $url
-     * @return string
+     *
      * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
+     *
+     * @return string
      */
-    protected function getFileContents(string $url) : string
+    protected function getFileContents(string $url): string
     {
         if (false === $file = @file_get_contents($url)) {
             throw new ImageException('error downloading: ' . $url);
@@ -72,14 +75,16 @@ class ImageTools
     }
 
     /**
-     * Import image from URL to destination folder
+     * Import image from URL to destination folder.
      *
      * @param string $url
      * @param string $destination
-     * @return string
+     *
      * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
+     *
+     * @return string
      */
-    public function import(string $url, string $destination) : string
+    public function import(string $url, string $destination): string
     {
         $filepath = parse_url($url, PHP_URL_PATH);
         $shouldConvert = $this->shouldConvert($filepath);
@@ -92,25 +97,26 @@ class ImageTools
     }
 
     /**
-     * Download file without modifying
+     * Download file without modifying.
      *
      * @param string $url
      * @param string $destination
      */
-    public function downloadAsIs(string $url, string $destination) : void
+    public function downloadAsIs(string $url, string $destination): void
     {
         $raw = $this->getFileContents($url);
         file_put_contents($destination, $raw);
     }
 
     /**
-     * Download file and convert to WebP
+     * Download file and convert to WebP.
      *
      * @param string $url
      * @param string $destination
+     *
      * @throws \PedroSancao\Wordimpress\Exceptions\ImageException
      */
-    public function downloadAsWebp(string $url, string $destination) : void
+    public function downloadAsWebp(string $url, string $destination): void
     {
         $raw = $this->getFileContents($url);
         if (false === $image = imagecreatefromstring($raw)) {

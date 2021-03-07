@@ -25,13 +25,14 @@ trait DataLoadTrait
     protected $blogData = [];
 
     /**
-     * Load data from API for a resource
+     * Load data from API for a resource.
      *
      * @param string $endpoint
      * @param array $parameters
      * @param \PedroSancao\Wordimpress\callable $callback
      * @param string $value
      * @param string $key
+     *
      * @return array
      */
     protected function loadData(
@@ -40,7 +41,7 @@ trait DataLoadTrait
         callable $callback,
         string $value = null,
         string $key = null
-    ) : array {
+    ): array {
         $data = $this->apiClient->loadData($endpoint, $parameters);
         if (empty($data)) {
             return [];
@@ -54,9 +55,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Load pages data if the site enabled it
+     * Load pages data if the site enabled it.
      */
-    protected function loadPages() : void
+    protected function loadPages(): void
     {
         if ($this->site instanceof WithPagesInterface) {
             $this->blogData['pages'] = $this->loadData(
@@ -70,9 +71,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Load posts data if the site enabled it
+     * Load posts data if the site enabled it.
      */
-    protected function loadPosts() : void
+    protected function loadPosts(): void
     {
         if ($this->site instanceof WithPostsInterface) {
             $this->blogData['posts'] = $this->loadData(
@@ -86,9 +87,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Load media data if the site enabled it
+     * Load media data if the site enabled it.
      */
-    protected function loadMedia() : void
+    protected function loadMedia(): void
     {
         if ($this->site instanceof WithMediaInterface) {
             $this->blogData['media'] = $this->loadData(
@@ -102,9 +103,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Load authors data if the site enabled it
+     * Load authors data if the site enabled it.
      */
-    protected function loadAuthors() : void
+    protected function loadAuthors(): void
     {
         if ($this->site instanceof WithAuthorsInterface) {
             $this->blogData['authors'] = $this->loadData(
@@ -118,9 +119,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Load categories data if the site enabled it
+     * Load categories data if the site enabled it.
      */
-    protected function loadCategories() : void
+    protected function loadCategories(): void
     {
         if ($this->site instanceof WithCategoriesInterface) {
             $this->blogData['categories'] = $this->loadData(
@@ -134,9 +135,9 @@ trait DataLoadTrait
     }
 
     /**
-     * Import images if the site enabled it
+     * Import images if the site enabled it.
      */
-    protected function importImages() : void
+    protected function importImages(): void
     {
         $hasMedia = count(array_intersect(array_keys($this->blogData), ['media', 'posts'])) > 0;
         if ($hasMedia && $this->site instanceof ImportImagesInterface) {

@@ -19,29 +19,36 @@ class Cli
     private $site;
 
     /**
-     * Create new instance
-     *
-     * @param array $argv
+     * @var string
      */
-    public function __construct(array $argv)
+    private $wordimpressExecutable;
+
+    /**
+     * Create new instance.
+     *
+     * @param string $siteClass
+     */
+    public function __construct(string $siteClass)
     {
-        if (count($argv) < 2 || !class_exists($argv[1])) {
+        if (!class_exists($siteClass)) {
             $this->printColor("Please provide a valid class name\n", 1);
             exit(1);
         }
 
-        $this->site = new $argv[1];
-        if (!$this->site instanceof SiteInterface) {
-            $interface = SiteInterface::class;
+        $interface = SiteInterface::class;
+        $reflector = new \ReflectionClass($siteClass);
+        if (!$reflector->implementsInterface($interface)) {
             $this->printColor("Provided class must implements {$interface}\n", 1);
             exit(1);
         }
+
+        $this->site = new $siteClass();
     }
 
     /**
-     * Fetch data and generate HTML pages
+     * Fetch data and generate HTML pages.
      */
-    public function generateHtml() : void
+    public function generateHtml(): void
     {
         $generator = new Generator($this->site);
         $generator->prepare();
@@ -49,11 +56,11 @@ class Cli
     }
 
     /**
-     * Compile all resources: HTML, Sass and media
+     * Compile all resources: HTML, Sass and media.
      *
      * @param bool $forProduction
      */
-    public function run(bool $forProduction = false) : void
+    public function run(bool $forProduction = false): void
     {
         $this->generateHtml();
         $this->compileSass($forProduction);
@@ -61,16 +68,17 @@ class Cli
     }
 
     /**
-     * Watch for file change and recompile
+     * Watch for file change and recompile.
      */
-    public function watch() : void
+    public function watch(): void
     {
-        $callbackWatches = ['generateHtml' => [
+        $this->validateWatcher();
+        $callbackWatches = ['invokeBuildHtml' => [
             (new ReflectionClass($this->site))->getFileName(),
             $this->site->getTemplatesDir(),
         ]];
         if ($this->site instanceof WatchFilesInterface) {
-            array_push($callbackWatches['generateHtml'], ...$this->site->watchPaths());
+            array_push($callbackWatches['invokeBuildHtml'], ...$this->site->watchPaths());
         }
         if ($this->site instanceof CompileSassInterface) {
             $callbackWatches['compileSass'] = [dirname($this->site->getSassSourceFile())];
@@ -104,11 +112,35 @@ class Cli
     }
 
     /**
-     * Invoke Sass compiler
+     * Validate watcher requirements.
+     */
+    protected function validateWatcher(): void
+    {
+        if (php_sapi_name() !== 'cli') {
+            throw new \ErrorException('Watcher can only be used on CLI.');
+        }
+        global $argv;
+        if (basename($argv[0]) !== 'wordimpress') {
+            $this->printColor("Cannot find executable, please use wordimpress script.\n", 1);
+            exit;
+        }
+        $this->wordimpressExecutable = $argv[0];
+    }
+
+    /**
+     * Invoke HTML generator in new process.
+     */
+    protected function invokeBuildHtml(): void
+    {
+        passthru($this->wordimpressExecutable . ' --html-only ' . get_class($this->site));
+    }
+
+    /**
+     * Invoke Sass compiler.
      *
      * @param bool $forProduction
      */
-    protected function compileSass(bool $forProduction = false) : void
+    protected function compileSass(bool $forProduction = false): void
     {
         if ($this->site instanceof CompileSassInterface) {
             echo "Compiling Sass.\n";
@@ -144,9 +176,9 @@ class Cli
     }
 
     /**
-     * Copy media files
+     * Copy media files.
      */
-    protected function copyMedia() : void
+    protected function copyMedia(): void
     {
         if ($this->site instanceof CopyMediaInterface) {
             echo "Copying media.\n";

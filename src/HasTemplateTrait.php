@@ -15,13 +15,13 @@ trait HasTemplateTrait
     protected $blogData = [];
 
     /**
-     * Add template for page
+     * Add template for page.
      *
      * @param string $template Twig template file
      * @param string $exportFile file to export the generated page
      * @param array $data additional data to pass on the template
      */
-    public function addTemplate(string $template, string $exportFile, array $data = []) : void
+    public function addTemplate(string $template, string $exportFile, array $data = []): void
     {
         $this->templates[] = [
             'template' => $template,
@@ -31,13 +31,13 @@ trait HasTemplateTrait
     }
 
     /**
-     * Add template for pages
+     * Add template for pages.
      *
      * @param string $template Twig template file
      * @param string $exportPrefix location prefix to export the generated pages
      * @param array $data additional data to pass on the template
      */
-    public function addPageTemplate(string $template, string $exportPrefix = '', array $data = []) : void
+    public function addPageTemplate(string $template, string $exportPrefix = '', array $data = []): void
     {
         if (key_exists('pages', $this->blogData)) {
             foreach ($this->blogData['pages'] as $slug => $page) {
@@ -47,13 +47,13 @@ trait HasTemplateTrait
     }
 
     /**
-     * Add template for post pages
+     * Add template for post pages.
      *
      * @param string $template Twig template file
      * @param string $exportPrefix location prefix to export the generated pages
      * @param array $data additional data to pass on the template
      */
-    public function addPostTemplate(string $template, string $exportPrefix = 'post/', array $data = []) : void
+    public function addPostTemplate(string $template, string $exportPrefix = 'post/', array $data = []): void
     {
         if (key_exists('posts', $this->blogData)) {
             foreach ($this->blogData['posts'] as $post) {
@@ -63,16 +63,16 @@ trait HasTemplateTrait
     }
 
     /**
-     * Add template for category pages
+     * Add template for category pages.
      *
      * @param string $template Twig template file
      * @param string $exportPrefix location prefix to export the generated pages
      * @param array $data additional data to pass on the template
      */
-    public function addCategoryTemplate(string $template, string $exportPrefix = 'category/', array $data = []) : void
+    public function addCategoryTemplate(string $template, string $exportPrefix = 'category/', array $data = []): void
     {
         if (key_exists('categories', $this->blogData)) {
-            $posts = key_exists('posts', $this->blogData) ? $this->blogData['posts']: [];
+            $posts = key_exists('posts', $this->blogData) ? $this->blogData['posts'] : [];
             foreach ($this->blogData['categories'] as $idCategory => $category) {
                 $categoryPosts = array_filter($posts, function ($post) use ($idCategory) {
                     return in_array($idCategory, $post->categories);
@@ -89,7 +89,7 @@ trait HasTemplateTrait
      * @param string $exportPrefix location prefix to export the generated pages
      * @param array $data additional data to pass on the template
      */
-    public function addAuthorTemplate(string $template, string $exportPrefix = 'tag/', array $data = []) : void
+    public function addAuthorTemplate(string $template, string $exportPrefix = 'tag/', array $data = []): void
     {
         throw new \ErrorException('tag template not implemented.');
     }
@@ -101,7 +101,7 @@ trait HasTemplateTrait
      * @param string $exportPrefix location prefix to export the generated pages
      * @param array $data additional data to pass on the template
      */
-    public function addTagTemplate(string $template, string $exportPrefix = 'tag/', array $data = []) : void
+    public function addTagTemplate(string $template, string $exportPrefix = 'tag/', array $data = []): void
     {
         throw new \ErrorException('tag template not implemented.');
     }

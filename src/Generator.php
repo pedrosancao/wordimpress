@@ -43,11 +43,11 @@ class Generator
     }
 
     /**
-     * Initialize Twig template engine
+     * Initialize Twig template engine.
      *
      * @oaram PedroSancao\Wordimpress\Contracts\SiteInterface $site
      */
-    protected function initTwig() : void
+    protected function initTwig(): void
     {
         $loader = new FilesystemLoader($this->site->getTemplatesDir());
         $this->twig = new Environment($loader, [
@@ -61,7 +61,7 @@ class Generator
     }
 
     /**
-     * Add a global variable to twig
+     * Add a global variable to twig.
      *
      * @param string $name
      * @param type $value
@@ -74,29 +74,29 @@ class Generator
     }
 
     /**
-     * Get the twig instance
+     * Get the twig instance.
      *
      * @return Twig\Environment
      */
-    public function getTwig() : Environment
+    public function getTwig(): Environment
     {
         return $this->twig;
     }
 
     /**
-     * Get all the blog data loaded
+     * Get all the blog data loaded.
      *
      * @return array
      */
-    public function getBlogData() : array
+    public function getBlogData(): array
     {
         return $this->blogData;
     }
 
     /**
-     * Prepare generation fetching all data from API
+     * Prepare generation fetching all data from API.
      */
-    public function prepare() : void
+    public function prepare(): void
     {
         if (!$this->loadCache()) {
             $this->loadPages();
@@ -110,16 +110,16 @@ class Generator
     }
 
     /**
-     * Prepare generation fetching all data from API
+     * Prepare generation fetching all data from API.
      */
-    public function generate() : void
+    public function generate(): void
     {
         $this->site->beforeGenerate($this);
         $this->site->configureTemplates($this);
         $this->generatePages();
     }
 
-    protected function generatePages() : void
+    protected function generatePages(): void
     {
         $output = rtrim($this->site->getOutputDir(), '/') . '/';
         $directories = array_diff(array_unique(array_map(function ($template) {

@@ -2,9 +2,9 @@
 
 namespace PedroSancao\Wordimpress\Template;
 
-use Twig\RuntimeLoader\RuntimeLoaderInterface;
-use Twig\Extra\Markdown\MarkdownRuntime;
 use Twig\Extra\Markdown\DefaultMarkdown;
+use Twig\Extra\Markdown\MarkdownRuntime;
+use Twig\RuntimeLoader\RuntimeLoaderInterface;
 
 class MarkdownLoader implements RuntimeLoaderInterface
 {
