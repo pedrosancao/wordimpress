@@ -25,8 +25,8 @@ trait HasTemplateTrait
     {
         $this->templates[] = [
             'template' => $template,
-            'file'     => ltrim($exportFile, '/'),
-            'data'     => $data + $this->blogData,
+            'file' => ltrim($exportFile, '/'),
+            'data' => $data + $this->blogData,
         ];
     }
 
@@ -105,5 +105,4 @@ trait HasTemplateTrait
     {
         throw new \ErrorException('tag template not implemented.');
     }
-
 }

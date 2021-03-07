@@ -6,7 +6,7 @@ trait CacheTrait
 {
     /**
      *  Gets the path for cache file
-     * 
+     *
      * @return string
      */
     protected function getCacheFile() : string
