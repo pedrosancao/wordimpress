@@ -57,47 +57,42 @@ trait HasMediaTrait
     {
         $imageSizes = get_object_vars($media->media_details->sizes);
         usort($imageSizes, function ($image1, $image2) {
-            return $image1->width - $image2->width;
+            $widthDiff = $image2->width - $image1->width;
+            if ($widthDiff === 0) {
+                return $image2->height - $image1->height;
+            }
+            return $widthDiff;
         });
 
-        $minWidthThumbnail = $this->getMinWidthThumbnail();
-        $minWidthMedium = $this->getMinWidthMedium();
-        $minWidthLarge = $this->getMinWidthLarge();
-        $thumbnail = $medium = $large = null;
-        foreach ($imageSizes as $imageSize) {
-            if (is_null($thumbnail) && $imageSize->width >= $minWidthThumbnail) {
-                $thumbnail = $medium = $large = $imageSize->source_url;
-            }
-            if ($medium === $thumbnail && $imageSize->width >= $minWidthMedium) {
-                $medium = $large = $imageSize->source_url;
-            }
-            if ($large === $medium && $imageSize->width >= $minWidthLarge) {
-                $large = $imageSize->source_url;
-                break;
+        $namedSizes = $this->getNamedImagesSizes();
+        $selectedImages = [];
+        foreach($namedSizes as $sizeName => $width) {
+            $selectedImages[$sizeName] = $imageSizes[0]->source_url;
+            foreach ($imageSizes as $imageSize) {
+                if ($imageSize->width < $width) {
+                    break;
+                }
+                $selectedImages[$sizeName] = $imageSize->source_url;
             }
         }
         return (object) [
-            'sizes' => (object) [
-                'thumb' => $thumbnail,
-                'medium' => $medium,
-                'large' => $large,
-            ],
+            'sizes' => (object) $selectedImages,
             'alt' => $media->alt_text ?: strtr($media->title->rendered, '-_', '  '),
         ];
     }
 
-    protected function getMinWidthThumbnail(): int
+    /**
+     * Get images sizes and breakpoints for each one.
+     *
+     * @return int[]
+     */
+    protected function getNamedImagesSizes() : array
     {
-        return 333;
-    }
-
-    protected function getMinWidthMedium(): int
-    {
-        return 635;
-    }
-
-    protected function getMinWidthLarge(): int
-    {
-        return 825;
+        return [
+            'thumb' => 333,
+            'medium' => 635,
+            'large' => 825,
+            'social' => 1200,
+        ];
     }
 }
