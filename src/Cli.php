@@ -2,6 +2,7 @@
 
 namespace PedroSancao\Wordimpress;
 
+use ErrorException;
 use PedroSancao\Wordimpress\Cli\FormatTextTrait;
 use PedroSancao\Wordimpress\Contracts\CompileSassInterface;
 use PedroSancao\Wordimpress\Contracts\CopyMediaInterface;
@@ -17,6 +18,11 @@ class Cli
      * @var \PedroSancao\Wordimpress\Contracts\SiteInterface
      */
     private $site;
+
+    /**
+     * @var string
+     */
+    private $wordimpressExecutable;
 
     /**
      * Create new instance
@@ -67,12 +73,13 @@ class Cli
      */
     public function watch() : void
     {
-        $callbackWatches = ['generateHtml' => [
+        $this->validateWatcher();
+        $callbackWatches = ['invokeBuildHtml' => [
             (new ReflectionClass($this->site))->getFileName(),
             $this->site->getTemplatesDir(),
         ]];
         if ($this->site instanceof WatchFilesInterface) {
-            array_push($callbackWatches['generateHtml'], ...$this->site->watchPaths());
+            array_push($callbackWatches['invokeBuildHtml'], ...$this->site->watchPaths());
         }
         if ($this->site instanceof CompileSassInterface) {
             $callbackWatches['compileSass'] = [dirname($this->site->getSassSourceFile())];
@@ -103,6 +110,30 @@ class Cli
                 call_user_func([$this, $watcherCallbacks[$event['wd']]]);
             }
         }
+    }
+
+    /**
+     * Validate watcher requirements
+     */
+    protected function validateWatcher() : void
+    {
+        if (php_sapi_name() !== 'cli') {
+            throw new \ErrorException('Watcher can only be used on CLI.');
+        }
+        global $argv;
+        if (basename($argv[0]) !== 'wordimpress') {
+            $this->printColor("Cannot find executable, please use wordimpress script.\n", 1);
+            exit;
+        }
+        $this->wordimpressExecutable = $argv[0];
+    }
+
+    /**
+     * Invoke HTML generator in new process
+     */
+    protected function invokeBuildHtml() : void
+    {
+        passthru($this->wordimpressExecutable . ' --html-only ' . get_class($this->site));
     }
 
     /**
